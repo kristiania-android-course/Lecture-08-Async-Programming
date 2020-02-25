@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE // Show progress bar spinning wheel
             }
 
-            var block = Block("Block No: $blockNo" , difficultyLevel); // Creating a block that will be mined and added to the block chain data structure
 
             //start of Unprotected shared data (Critical section)
+            var block = Block("Block No: $blockNo" , difficultyLevel); // Creating a block that will be mined and added to the block chain data structure
             blockchain.mineAndAdd( block ) // mining and adding block
             blockNo ++
             //end of Unprotected shared data
