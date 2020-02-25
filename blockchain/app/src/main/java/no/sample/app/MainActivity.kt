@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-
-
         floatingActionButton.setOnClickListener{
 
             progressBar.visibility = View.VISIBLE // Show progress bar spinning wheel
