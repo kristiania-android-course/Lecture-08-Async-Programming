@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     var blockchain = Blockchain() // Blockchain Data structure
 
     var blockNo = 1;            // Initial block number which will be incremented with one after the block is mined and added to chain
-    val difficultyLevel = 4     // This number dictate what would be the  time complexity of the block mining algorithm
+    val difficultyLevel = 4     // This number dictates what would be the  time complexity of the block mining algorithm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
