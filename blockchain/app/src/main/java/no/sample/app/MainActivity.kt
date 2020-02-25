@@ -6,10 +6,12 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import no.sample.app.blockchain.Block
 import no.sample.app.blockchain.Blockchain
-
+import java.util.concurrent.Semaphore
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val sharedCounterLock = Semaphore(1)
 
     var blockchain = Blockchain() // Blockchain Data structure
 
@@ -35,18 +37,27 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE // Show progress bar spinning wheel
             }
 
-            var block = Block("Block No: $blockNo" , difficultyLevel); // Creating a block that will be mined and added to the block chain data structure
-
-            //start of Unprotected shared data (Critical section)
-            blockchain.mineAndAdd( block ) // mining and adding block
-            blockNo ++
-            //end of Unprotected shared data
+            mineAndAdd()
 
             this@MainActivity.runOnUiThread { // Run on ui thread using activity runOnUiThread
                 textViewConsole.text = blockchain.toString() // turning the blockchain information into a string
                 progressBar.visibility = View.INVISIBLE // Stop progress bar spinning wheel
 
             }
+        }
+
+        fun mineAndAdd() {
+            //start of Protected shared data (Critical section)
+            try {
+                sharedCounterLock.acquire()
+                var block = Block("Block No: $blockNo" , difficultyLevel); // Creating a block that will be mined and added to the block chain data structure
+                blockchain.mineAndAdd( block ) // mining and adding block
+                blockNo ++
+            } finally {
+                sharedCounterLock.release()
+            }
+            //end of Protected shared data
+
         }
     }
 }
