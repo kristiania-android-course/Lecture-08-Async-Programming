@@ -7,7 +7,7 @@ class Blockchain {
 
     private var chain = ArrayList<Block>()
 
-    fun add(block: Block) {
+    fun mineAndAdd(block: Block) {
 
 
         if( chain.size > 0 )
