@@ -5,7 +5,7 @@ This is a code sample to teach concepts of the threading and async programmimg. 
 
 |Branches|Details|
 |-------|--------|
-|Master||
+|Master| Use the live code to use during the class session|
 |sync| Branch code uses a non thread blocking logic to show issues in UI update|
 |async_thread| Branch code uses thread based implementation without semaphores to show thread synchronization issues|
 |async_thread_semaphore| Branch code uses thread based implementation with semaphores to solve the synchronization issues|
